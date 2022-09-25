@@ -5,12 +5,16 @@ include ':react-native-linear-gradient'
 include ':react-native-document-picker'
 include ':react-native-gesture-handler'
 include ':react-native-video'
+// include ':react-native-fs'
+include ':rn-fetch-blob'
 include ':react-native-vector-icons'
 project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
 project(':react-native-document-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-document-picker/android')
 project(':react-native-linear-gradient').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-linear-gradient/android')
 project(':react-native-gesture-handler').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-gesture-handler/android')
 project(':react-native-video').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-video/android')
+// project(':react-native-fs').projectDir = new File(settingsDir, '../node_modules/react-native-fs/android')
+project(':rn-fetch-blob').projectDir = new File(settingsDir, '../node_modules/rn-fetch-blob/android')
 includeBuild('../node_modules/react-native-gradle-plugin')
 
 if (settings.hasProperty("newArchEnabled") && settings.newArchEnabled == "true") {

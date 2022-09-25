@@ -7,12 +7,17 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({children}) =>{
     const [user, setUser] = useState(null);
-    const [status, setStatus] = useState(true);
-    const [dLoad,setDload] = useState(true);
-    const [admStats,setAdmStats] = useState(true);
+    const [status, setStatus] = useState(false);
+    const [dLoad,setDload] = useState(false);
+    const [admStats,setAdmStats] = useState(false);
 
     const [duserName,setDuserName] = useState('');
     const [dEmail,setDemail] = useState('');
+
+    const [user_id,setUser_id] = useState('');
+
+    const [authFavorites_id,setAuthFavorites_id] = useState('');
+    const [favoriteAdded,setFavoriteAdded] = useState(true);
 
     const [actType,setActType] = useState('');
     const [actDuration,setActDuration] = useState('');
@@ -37,6 +42,12 @@ export const AuthProvider = ({children}) =>{
                 setDuserName,
                 dEmail,
                 setDemail,
+                authFavorites_id,
+                setAuthFavorites_id,
+                favoriteAdded,
+                setFavoriteAdded,
+                user_id,
+                setUser_id,
                 signIn: () => {
                     // setAdmStats(false)
                     // setDload(false)

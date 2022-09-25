@@ -1,6 +1,6 @@
 import React, {useState,useContext} from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native'
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import  Icon  from 'react-native-vector-icons/Ionicons';
 
@@ -12,7 +12,9 @@ const Login = ({navigation}) => {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
 
-    const {signIn,setDuserName,setDemail,setAdmStats} = useContext(AuthContext);
+    const [pIcon,setPIcon] = useState(true);
+
+    const {signIn,setDuserName,setDemail,setAdmStats,setAuthFavorites_id,setUser_id} = useContext(AuthContext);
 
 
     const handleSubmitPress = async () => {
@@ -32,7 +34,7 @@ const Login = ({navigation}) => {
         //   password: password,
         // };
         // setSta({isVis: true})
-        fetch('http://127.0.0.1:5000/login', {
+        fetch('http://rnflaskmongoapi-env.eba-xpzve2yf.us-east-1.elasticbeanstalk.com/login', {
           method: 'POST',
           headers: {
             //Header Defination
@@ -55,15 +57,17 @@ const Login = ({navigation}) => {
               console.log(response.name);
               setDemail(response.info.email)
               setDuserName(response.info.name)
+              setUser_id(response.info._id)
               setAdmStats(response.info.adm)
+              setAuthFavorites_id(response.info.favories_id)
               
-              //  AsyncStorage.setItem('id', response.id)
-              //  AsyncStorage.setItem('token', response.token)
-              //  AsyncStorage.setItem('name', response.name)
+               AsyncStorage.setItem('user_id', response.info._id)
+               AsyncStorage.setItem('token', response.status)
+               AsyncStorage.setItem('duserName', response.info.name)
               //  AsyncStorage.setItem('propic', response.propic)
-              //  AsyncStorage.setItem('about', response.about)
-              //  AsyncStorage.setItem('phone', response.phone)
-              //  AsyncStorage.setItem('adm', response.adm)
+               AsyncStorage.setItem('dEmail', response.info.email)
+               AsyncStorage.setItem('authFavorites_id', response.info.favories_id)
+               AsyncStorage.setItem('admStats', response.info.adm)
               // setSta({isVis: false})
               //navigation.navigate('ElHome');
               signIn()
@@ -108,9 +112,9 @@ const Login = ({navigation}) => {
 
       <View style={{flexDirection:'row',marginTop:24}}>  
         <TouchableOpacity style={{marginTop:35}}
-          // onPress={()=>{setPword(!pword)}}
+          onPress={()=>setPIcon(!pIcon)}
           >
-          <Icon name={"eye-sharp"} size={25} color={'#C0C0C0'}/>
+          <Icon name={pIcon ?"eye-off":"eye-sharp"} size={25} color={'#C0C0C0'}/>
         </TouchableOpacity> 
             <TextInput
               style={styles.input}
@@ -118,6 +122,7 @@ const Login = ({navigation}) => {
               //value={number}
 
               // secureTextEntry={pword}
+              secureTextEntry={pIcon}
               placeholder="Password"
               placeholderTextColor="#C0C0C0"
               //keyboardType="numeric"

@@ -3,6 +3,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Favorite from './Favorite';
 import MovieScreen from '../Movie/MovieScreen'
+import VideoScreen from '../Movie/VideoScreen';
 
 // const RootStack = createStackNavigator();
 const FavoriteStack1 = createStackNavigator();
@@ -14,6 +15,7 @@ const FavoriteStacker = () => {
     <FavoriteStack1.Navigator headerMode='none'>
         <FavoriteStack1.Screen name='Favorite1' component={Favorite}/>
         <FavoriteStack1.Screen name='MovieS' component={MovieScreen}/>
+        <FavoriteStack1.Screen name='VideoS' component={VideoScreen}/>
     </FavoriteStack1.Navigator>
   )
 }

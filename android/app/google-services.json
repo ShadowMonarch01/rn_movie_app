@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "809917385845",
+    "project_id": "rn-movie-ui-storage",
+    "storage_bucket": "rn-movie-ui-storage.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:809917385845:android:70ab7cf71d5b3699707c3c",
+        "android_client_info": {
+          "package_name": "com.uiapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "809917385845-lcarpkv3f10f5f76vmsohjtddsq479gg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTpaiUmhMths_N3RJ7aGNenclwL6fUkxM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "809917385845-lcarpkv3f10f5f76vmsohjtddsq479gg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

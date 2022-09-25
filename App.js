@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 // import { StatusBar } from 'expo-status-bar';
-import React,{useContext,useState} from 'react';
+import React,{useContext,useState,useEffect} from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -11,6 +11,7 @@ import Register from './screens/src/Register';
 import HomeNavs from './screens/HomeScreens/Navigation';
 import Payment from './screens/HomeScreens/Payment';
 import SettingsScreen from './screens/HomeScreens/Settings';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { AuthContext, AuthProvider } from './theauth/context';
 
@@ -38,7 +39,7 @@ const LoginScreens = () =>{
 // }
 
 const CustomDrawer = (props) =>{
-  const Pic = require('./screens/imgs/FB_IMG_3.jpg')
+  const Pic = require('./screens/imgs/avatar.jpg')
   const {signOut} = useContext(AuthContext);
   
   return(
@@ -58,10 +59,19 @@ const CustomDrawer = (props) =>{
      </DrawerContentScrollView>
      
      <TouchableOpacity style={{position:'absolute',right:0,left:0, bottom:50, padding:20}}
-      onPress={()=>{
-                    // navigation.closeDrawer()
+      onPress={async ()=>{
+                  try{
+                    await AsyncStorage.clear()
+                    // AsyncStorage.setItem('alreadyLaunched', 'true');
+                    //AsyncStorage.setItem('token','false')
+                    //navigation.navigate('SignInScreen')
                     signOut()
-                  }}
+                } catch (eer) {
+                    console.log(eer)
+                }
+                    // navigation.closeDrawer()
+                    // signOut()
+             }}
      >
       <Text style={{color:'white',fontWeight:"bold"}}>Log Out</Text>
      </TouchableOpacity>
@@ -99,7 +109,21 @@ const HomeScreens = ({navigation}) =>{
 }
 
 const Navs = () =>{
-  const {status, setUser} = useContext(AuthContext);
+  const {status, setUser,setStatus} = useContext(AuthContext);
+
+  useEffect(() => {
+    AsyncStorage.getItem('token').then(value => {
+     if(value === null) {
+       //AsyncStorage.setItem('alreadyLaunched', 'true');
+       //AsyncStorage.setItem('token','true')
+       setStatus(false);
+     } else{
+       setStatus(true);
+       //AsyncStorage.setItem('token','true')
+     }
+   });
+  }, []);
+
   return(
     <NavigationContainer>
     {status?<HomeScreens/> : <LoginScreens/>}

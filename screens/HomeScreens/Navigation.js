@@ -11,18 +11,21 @@ import Home from './Home/Home';
 import Favorite from './Favorite/Favorite';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { AuthContext } from '../../theauth/context';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const UiTab = createBottomTabNavigator();
 
 const HomeNavs = ({navigation}) => {
-    const {dLoad,setDload,admStats} = useContext(AuthContext)
+    const {dLoad,setDload,admStats,setAdmStats} = useContext(AuthContext)
 
     useEffect(()=>{
-        if(admStats){
-            setDload(true)
-        }else{
-            setDload(false)
-        }
+        AsyncStorage.getItem('admStats').then(value => {
+            if(value){
+                setAdmStats(true)
+            }else{
+                setAdmStats(false)
+            }
+        })
+        
     },[admStats])
 
     

@@ -1,6 +1,6 @@
 import React, {useState,useContext} from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native'
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import  Icon  from 'react-native-vector-icons/Ionicons';
 
@@ -13,13 +13,20 @@ const Register = ({navigation}) => {
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
 
-  const {signIn,setDuserName,setDemail,setAdmStats} = useContext(AuthContext)
+  const [conPassword,setConPassword] = useState('');
+
+  const [pIcon,setPIcon] = useState(true);
+
+  const [conIcon,setConIcon] = useState(true);
+
+  const {signIn,setDuserName,setDemail,setAdmStats,setAuthFavorites_id,setUser_id} = useContext(AuthContext)
 
 
 
   const handleSubmitPress = async () => {
     // setMerror('')
     // setErrortext('');
+    
 
     if (!userName) {
       alert('Please enter a UserName');
@@ -34,13 +41,18 @@ const Register = ({navigation}) => {
       alert('Please enter a Password');
       return;
     }
+
+    if (password !== conPassword) {
+      alert('Please confirm your password');
+      return;
+    }
     //setLoading(true);
   //   var dataToSend = {
   //     email: email,
   //     password: password,
   //   };
   //   setSta({isVis: true})
-    fetch('http://127.0.0.1:5000/register', {
+    fetch('http://rnflaskmongoapi-env.eba-xpzve2yf.us-east-1.elasticbeanstalk.com/register', {
       method: 'POST',
       headers: {
         //Header Defination
@@ -60,6 +72,32 @@ const Register = ({navigation}) => {
         console.log(response);
         // If server response message same as Data Matched
         if (response.status === 'success') {
+          setDemail(response.email)
+          setDuserName(response.name)
+          setUser_id(response.user_id)
+          setAdmStats(response.adm)
+          setAuthFavorites_id(response.favories_id)
+
+          AsyncStorage.setItem('user_id', response.user_id)
+          AsyncStorage.setItem('token', response.status)
+          AsyncStorage.setItem('duserName', response.name)
+        //  AsyncStorage.setItem('propic', response.propic)
+          AsyncStorage.setItem('dEmail', response.email)
+          AsyncStorage.setItem('authFavorites_id', response.favories_id)
+          AsyncStorage.setItem('admStats', response.adm)
+
+
+          // "status": 'success',
+          //   "name": name,
+          //   "email": email,
+          //   "favories_id":str(favorite_id),
+          //   "user_id": str(user_id),
+          //   "adm": '',
+          //   "profilepic": ''
+
+
+
+
           //AsyncStorage.setItem('user_id', responseJson.data.email);
           // console.log(response.name);
           
@@ -126,8 +164,9 @@ const Register = ({navigation}) => {
       <View style={{flexDirection:'row'}}>  
         <TouchableOpacity style={{marginTop:44}}
           // onPress={()=>{setPword(!pword)}}
+          onPress={()=>setPIcon(!pIcon)}
           >
-          <Icon name="eye-sharp" size={25} color={'#C0C0C0'}/>
+          <Icon name={pIcon ?"eye-off":"eye-sharp"} size={25} color={'#C0C0C0'}/>
         </TouchableOpacity> 
             <TextInput
               style={styles.input}
@@ -135,6 +174,7 @@ const Register = ({navigation}) => {
               value={password}
 
               // secureTextEntry={pword}
+              secureTextEntry={pIcon}
               placeholder="Password"
               placeholderTextColor="#C0C0C0"
               //keyboardType="numeric"
@@ -142,18 +182,23 @@ const Register = ({navigation}) => {
         </View>
       
       <View style ={{flexDirection:'row'}}>
-        <TouchableOpacity style={{marginTop:44}}>
-          <Icon name={"eye-sharp"} size={25} color={'#C0C0C0'}/>
+        <TouchableOpacity style={{marginTop:44}}
+          onPress={()=>setConIcon(!conIcon)}
+        >
+          <Icon name={conIcon ?"eye-off":"eye-sharp"} size={25} color={'#C0C0C0'}/>
         </TouchableOpacity>
         <TextInput
           style={styles.input}
           placeholder='Confirm Password'
           placeholderTextColor="#C0C0C0"
+          value={conPassword}
+          secureTextEntry={conIcon}
+          onChangeText={(Password) => setConPassword(Password)}
         />
       </View>
 
       <TouchableOpacity style={styles.btn}
-        // onPress={()=>handleSubmitPress()}
+        onPress={()=>handleSubmitPress()}
       >
         <Text style={{fontSize:18}}>SIGN UP</Text>
       </TouchableOpacity>
@@ -197,6 +242,7 @@ const styles = StyleSheet.create({
       padding: 20,
       paddingBottom:2,
       width:"80%",
+      fontSize:18,
       // width:windowWidth/1.5,
       color:"#FFFFFF",
       

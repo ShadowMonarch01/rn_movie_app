@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   input: {
     padding: 10,
     flex: 1,
-    fontSize: 16,
+    fontSize: 24,
     fontFamily: 'Lato-Regular',
     color: '#333',
     justifyContent: 'center',
