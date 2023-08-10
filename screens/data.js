@@ -65,4 +65,6 @@ const movieList = [
     },
 ];
 
+export const api = 'https://vercel-movie-py-api.vercel.app';
+
 export default movieList;

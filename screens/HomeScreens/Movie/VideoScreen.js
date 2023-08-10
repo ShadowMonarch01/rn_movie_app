@@ -5,6 +5,7 @@ import VideoPlayer from 'react-native-video-player';
 import Video from 'react-native-video';
 import MediaControls,{ PLAYER_STATES } from 'react-native-media-controls';
 import Orientation from 'react-native-orientation-locker';
+import { api } from '../../data';
 
 const screenHeight = Dimensions.get('screen').height;
 const screenWidth = Dimensions.get('screen').width;
@@ -15,7 +16,9 @@ const VideoScreen = ({route,navigation}) => {
   const [videoLink,setVideoLink] = useState('');
 
   useEffect(()=>{
-    fetch('http://rnflaskmongoapi-env.eba-xpzve2yf.us-east-1.elasticbeanstalk.com/getvideo', {
+    console.log(vid);
+    console.log('====================')
+    fetch(`${api}/getvideo`, {
           method: 'POST',
           headers: {
             //Header Defination
@@ -34,7 +37,7 @@ const VideoScreen = ({route,navigation}) => {
             // If server response message same as Data Matched
             if (response.token === 'Upload succesful') {
              
-              setVideoLink(response.video)
+              setVideoLink(response.video.video)
               alert('Video link gotten')
               
               // setSta({isVis: false})
@@ -47,6 +50,7 @@ const VideoScreen = ({route,navigation}) => {
               // alert(response.msg);
               console.log('Please check your email id or password');
               console.log(response)
+              setVideoLink(response.video.video)
             }
           })
           .catch((error) => {

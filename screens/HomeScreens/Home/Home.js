@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import { AuthContext } from '../../../theauth/context';
 
+import { api } from '../../data';
 
 const Home = ({navigation}) => {
 
@@ -25,7 +26,7 @@ const Home = ({navigation}) => {
 
   const addToFavorites = async (item) => {
     console.log(item)
-    fetch('http://rnflaskmongoapi-env.eba-xpzve2yf.us-east-1.elasticbeanstalk.com/addfavorite', {
+    fetch(`${api}/addfavorite`, {
       method: 'POST',
       headers: {
         //Header Defination
@@ -63,7 +64,7 @@ const Home = ({navigation}) => {
 
   const getCollectionMovies = async () =>{
     
-    fetch('http://rnflaskmongoapi-env.eba-xpzve2yf.us-east-1.elasticbeanstalk.com/getrefreshhome', {
+    fetch(`${api}/getrefreshhome`, {
       method: 'POST',
       headers: {
         //Header Defination

@@ -7,6 +7,7 @@ import  Icon  from 'react-native-vector-icons/Ionicons';
 // import { windowWidth, windowHeight } from '../components/Dimensions';
 import { AuthContext } from '../../theauth/context';
 
+import { api } from '../data';
 
 const Register = ({navigation}) => {
   const [userName,setUserName] = useState('');
@@ -52,7 +53,7 @@ const Register = ({navigation}) => {
   //     password: password,
   //   };
   //   setSta({isVis: true})
-    fetch('http://rnflaskmongoapi-env.eba-xpzve2yf.us-east-1.elasticbeanstalk.com/register', {
+    fetch(`${api}/register`, {
       method: 'POST',
       headers: {
         //Header Defination

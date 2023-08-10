@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, Modal, ToastAndroid } from 'react-native'
 import React ,{useEffect, useState, useContext}from 'react';
-import movieList from '../../data';
+import movieList, { api } from '../../data';
 import { AuthContext } from '../../../theauth/context';
 
 const Favorite = ({navigation}) => {
@@ -18,7 +18,7 @@ const Favorite = ({navigation}) => {
 
   const handleSubmitPress = async () => {
     
-    fetch('http://rnflaskmongoapi-env.eba-xpzve2yf.us-east-1.elasticbeanstalk.com/getfavorite', {
+    fetch(`${api}/getfavorite`, {
       method: 'POST',
       headers: {
         //Header Defination
@@ -54,7 +54,7 @@ const Favorite = ({navigation}) => {
 
   const deleteMovie = async () => {
     
-    fetch('http://rnflaskmongoapi-env.eba-xpzve2yf.us-east-1.elasticbeanstalk.com/rmvfavorite', {
+    fetch(`${api}/rmvfavorite`, {
       method: 'POST',
       headers: {
         //Header Defination

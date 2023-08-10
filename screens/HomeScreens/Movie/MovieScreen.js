@@ -7,6 +7,7 @@ import RNFetchBlob from 'rn-fetch-blob';
 import { selectDirectory } from 'react-native-directory-picker';
 import { ScrollView } from 'react-native-gesture-handler';
 
+import { api } from '../../data';
 
 const MovieScreen = ({route,navigation}) => {
   const {pic,nav} = route.params;
@@ -20,6 +21,8 @@ const MovieScreen = ({route,navigation}) => {
 
   // const vv= RNFetchBlob.fs.
   useEffect(()=>{
+    console.log('Pic data')
+    console.log(pic)
     setVLink("")
   },[pic])
   
@@ -93,7 +96,7 @@ const MovieScreen = ({route,navigation}) => {
     //   console.log(`This is the path ${path}`)
     // })
 
-    await fetch('http://rnflaskmongoapi-env.eba-xpzve2yf.us-east-1.elasticbeanstalk.com/getvideo', {
+    await fetch(`${api}/getvideo`, {
           method: 'POST',
           headers: {
             //Header Defination

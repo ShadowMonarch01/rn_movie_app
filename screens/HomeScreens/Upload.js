@@ -7,6 +7,7 @@ import DocumentPicker from 'react-native-document-picker';
 import * as ImagePicker from 'react-native-image-picker'
 import VideoPlayer from 'react-native-video-player';
 import storage from '@react-native-firebase/storage';
+import { api } from '../data';
 // import RNFS from 'react-native-fs'
 
 
@@ -418,7 +419,7 @@ const uploadVideoDetails = async () =>{
   setStepsUploaded('(3/3)')
   // setTransferred(0)
 
-  fetch('http://rnflaskmongoapi-env.eba-xpzve2yf.us-east-1.elasticbeanstalk.com/movieupload', {
+  fetch(`${api}/movieupload`, {
         method: 'POST',
         headers: {
           //Header Defination
