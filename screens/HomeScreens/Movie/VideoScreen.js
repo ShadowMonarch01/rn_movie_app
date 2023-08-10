@@ -35,22 +35,16 @@ const VideoScreen = ({route,navigation}) => {
             //setLoading(false);
             console.log(response);
             // If server response message same as Data Matched
-            if (response.token === 'Upload succesful') {
+            if (response.token === 'Upload successful') {
              
               setVideoLink(response.video.video)
               alert('Video link gotten')
               
-              // setSta({isVis: false})
-              //navigation.navigate('ElHome');
-              // signIn()
             } else {
-              // setErrortext(response.msg);
-              // setSta({isVis: false})
-              // setMerror(response.msg)
-              // alert(response.msg);
+              
               console.log('Please check your email id or password');
               console.log(response)
-              setVideoLink(response.video.video)
+              
             }
           })
           .catch((error) => {

@@ -12,10 +12,10 @@ const Payment = ({navigation}) => {
   const [isLiked, setIsLiked] = useState([
     {id:1,name:"2 WEEK",details:'600'},
     {id:2,name:"1 MONTHS",details:'1200'},
-    {id:2,name:"2 MONTHS",details:'2000'},
-    {id:2,name:"3 MONTHS",details:'2500'},
-    {id:2,name:"4 MONTHS",details:'3000'},
-    {id:2,name:"5 MONTHS",details:'4000'},
+    {id:3,name:"2 MONTHS",details:'2000'},
+    {id:4,name:"3 MONTHS",details:'2500'},
+    {id:5,name:"4 MONTHS",details:'3000'},
+    {id:6,name:"5 MONTHS",details:'4000'},
   ])
 
   const onRadioBtnClick = (item) =>{
